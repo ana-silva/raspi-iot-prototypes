@@ -12,8 +12,7 @@ PIN_NR1 = $3 #Ptrig
 PIN_NR2 = $4 #Pecho
 
 #copy script (todo: using ssh key)
-scp ./sensoradapter_distance.py pi@$RASPI_IP:~/Desktop/sensoradapter_distance.py;
-#wget -r -A.py https://github.com/ana-silva/raspi-iot-prototypes/
+#scp ./sensoradapter_distance.py pi@$RASPI_IP:~/Desktop/sensoradapter_distance.py;
 
 #ssh connection
 ssh pi@$RASPI_IP;
@@ -21,5 +20,9 @@ ssh pi@$RASPI_IP;
 #install Mqtt client Paho
 pip install paho-mqtt;
 
+#download script
+wget https://raw.githubusercontent.com/ana-silva/raspi-iot-prototypes/master/sensoradapter_distance.py
+
 #start script
-sudo python ~/Desktop/sensoradapter_distance.py $SERVER_IP $PIN_NR1 $PIN_NR2 &
+sudo python ~/sensoradapter_distance.py $SERVER_IP $PIN_NR1 $PIN_NR2 &
+#this adapter pushes info to topic iot2/evt/distance/fmt/json
