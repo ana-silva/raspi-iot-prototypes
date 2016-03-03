@@ -5,6 +5,7 @@ import sys
 import time
 from datetime import datetime
 import json
+import RPi.GPIO as GPIO
 
 class ultraDist(object):
 	def __init__(self, ptrig, pecho):
@@ -52,7 +53,7 @@ mq_authtoken = ""
 mq_clientId = "d:" + mq_org + ":" + mq_type + ":" + mq_id
 
 # init GPIO ports for the distance sensors
-distA = ultraDist(sys.argv[2], sys.argv[3]) # ptrig, pecho
+distA = ultraDist(int(sys.argv[2]), int(sys.argv[3])) # ptrig, pecho
 
 
 # create MQTT client and set user name and password 
