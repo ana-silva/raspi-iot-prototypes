@@ -3,6 +3,6 @@ Contains example codes for sensor readings and sending comands to actuators atta
 
 #installing distance sensor adapter in a Raspberry pi
 
-$ sudo sh ./install_start_adapters.sh <raspi_ip> <mqtt_broker_ip> <ptrig> <pecho>
+$ sudo sh ./install_start_adapters.sh raspi_ip mqtt_broker_ip ptrig pecho
 
 e.g., in Raspi2 -> ptrig=17, pecho=18 | ptrig=23, pecho=24
