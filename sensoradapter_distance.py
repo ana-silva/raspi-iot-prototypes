@@ -40,7 +40,7 @@ class ultraDist(object):
 id_distance_sensor_0 = "A0" #todo: generate id?
 
 # topics
-topic_distance = "iot-2/evt/%s/fmt/json" % ("distance")
+topic_distance = "distance"
 
 # data for mqtt broker
 # from args #todo
