@@ -90,8 +90,6 @@ class analogInputReader(object):
 """
 Linker Digital Display
 """
-
-
 class TM1637:
 	__doublePoint = False
 	__Clkpin = 0
@@ -337,7 +335,7 @@ while True:
                                      "temperature": "%f" % (measured_temp)}
 	sendMessage (topic_temperature, json.dumps(msg_temperature_sensor_0))
 
-	if measured_temp > 25:
+	if measured_temp > 26:
 		if (lastCmd != 'ON'):
 			sendMessage (topic_action, 'ON')
 			lastCmd = 'ON'
