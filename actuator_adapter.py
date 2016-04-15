@@ -219,10 +219,10 @@ def on_message(client, userdata, msg):
 		if (msg.payload == 'ON'):
 			# send command through serial interface
 			ser.write(b'ON')
-      display.ShowInt(1)
+			display.ShowInt(1)
 		elif (msg.payload == 'OFF'):
 			ser.write(b'OFF')
-      display.ShowInt(0)
+			display.ShowInt(0)
 
 # set mqtt client callbacks
 client.on_connect = on_connect
