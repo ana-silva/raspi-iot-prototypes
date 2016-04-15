@@ -23,6 +23,7 @@ OUTPUT = GPIO.OUT
 INPUT = GPIO.IN
 LOW = GPIO.LOW
 HIGH = GPIO.HIGH
+pd = 27 #DATA PIN for buzzer
 
 """
 Ultrasonic distance sensor
@@ -115,6 +116,12 @@ class TM1637:
 		self.__brightnes = b;				# restore saved brightnes
 		self.__doublePoint = point;
 	# end  Clear
+	
+	def ShowInt(self, i):
+		s = str(i)
+		self.Clear()
+		for i in range(0,len(s)):
+			self.Show1(i, int(s[i]))
 
 	def Show( self, data ):
 		for i in range(0,4):
@@ -227,8 +234,6 @@ class TM1637:
 # end class TM1637
 
 class buzzer:
-  pd = 27 #DATA PIN
-
   def __init__( self):
     GPIO.setup(pd, OUTPUT)
     GPIO.output(pd, 0)
@@ -304,7 +309,7 @@ def sendMessage(topic, msg):
 client.connect(mq_host, 1883, 60)
 
 lastCmd  = '-'
-display = TM1637(23,24,TM1637.BRIGHT_TYPICAL)
+display = TM1637(23,24,BRIGHT_TYPICAL)
 buzzer_act = buzzer()
 for i in range (100, 10000, 100):
   buzzer_act.buzz(10,i)
