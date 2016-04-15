@@ -6,7 +6,8 @@ import time
 from datetime import datetime
 import json
 import serial
- 
+import RPi.GPIO as GPIO
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
