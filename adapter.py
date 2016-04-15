@@ -298,7 +298,7 @@ client.on_message = on_message
 # publishes message to MQTT broker
 def sendMessage(topic, msg):
         client.publish(topic=topic, payload=msg, qos=0, retain=False)
-	print(msg)
+        print(msg)
 
 # connects to IBM IoT MQTT Broker
 client.connect(mq_host, 1883, 60)
@@ -316,37 +316,37 @@ for i in range (100, 10000, 100):
 client.loop_start()
 
 while True:
-	print("---------------------------------------")
-	# messages in json format
+        print("---------------------------------------")
+        # messages in json format
         # send message, topic: distance
-	t = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
-	measured_distance = distA.getValue()
-	#measured_distance = 1	
-	msg_distance_sensor_0 = { "sensorID": id_distance_sensor_0,
+        t = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+        measured_distance = distA.getValue()
+        #measured_distance = 1	
+        msg_distance_sensor_0 = { "sensorID": id_distance_sensor_0,
                                   "timestamp": t, 
                                   "distance": "%.1f" % (measured_distance)}
-	sendMessage (topic_distance, json.dumps(msg_distance_sensor_0))  
-        
-	# send message, topic: temperature
-	t = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
-	measured_temp = aiReader.getTemperature()
-	msg_temperature_sensor_0 = { "sensorID": id_temperature_sensor_0,
+        sendMessage (topic_distance, json.dumps(msg_distance_sensor_0))  
+
+        # send message, topic: temperature
+        t = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+        measured_temp = aiReader.getTemperature()
+        msg_temperature_sensor_0 = { "sensorID": id_temperature_sensor_0,
                                      "timestamp": t, 
                                      "temperature": "%f" % (measured_temp)}
-	sendMessage (topic_temperature, json.dumps(msg_temperature_sensor_0))
+        sendMessage (topic_temperature, json.dumps(msg_temperature_sensor_0))
 
-	if measured_temp > 26:
-		if (lastCmd != 'ON'):
-			sendMessage (topic_action, 'ON')
-			lastCmd = 'ON'
-	elif measured_temp < 24:
-		if (lastCmd != 'OFF'):
-			sendMessage (topic_action, 'OFF')
-			lastCmd = 'OFF'
+        if measured_temp > 26:
+                if (lastCmd != 'ON'):
+                        sendMessage (topic_action, 'ON')
+                        lastCmd = 'ON'
+        elif measured_temp < 24:
+                if (lastCmd != 'OFF'):
+                        sendMessage (topic_action, 'OFF')
+                        lastCmd = 'OFF'
 
-  display.ShowInt(int(measured_temp))
-	time.sleep(1)
-        
+        display.ShowInt(int(measured_temp))
+        time.sleep(1)
+
 client.loop_stop()
 client.disconnect()
 

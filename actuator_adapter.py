@@ -209,20 +209,20 @@ client = mqtt.Client(client_id=mq_clientId, clean_session=True, userdata=None, p
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
         print("ClientID: " + mq_clientId + "; Connected with result code " + str(rc))
-	client.subscribe(topic_action)
+        client.subscribe(topic_action)
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-  print("message: ")
-  print(msg.topic + " " + str(msg.payload))
-  if (msg.topic=='action'):
-		if (msg.payload == 'ON'):
-			# send command through serial interface
-			ser.write(b'ON')
-			display.ShowInt(1)
-		elif (msg.payload == 'OFF'):
-			ser.write(b'OFF')
-			display.ShowInt(0)
+        print("message: ")
+        print(msg.topic + " " + str(msg.payload))
+        if (msg.topic=='action'):
+                if (msg.payload == 'ON'):
+                        # send command through serial interface
+                        ser.write(b'ON')
+                        display.ShowInt(1)
+                elif (msg.payload == 'OFF'):
+                        ser.write(b'OFF')
+                        display.ShowInt(0)
 
 # set mqtt client callbacks
 client.on_connect = on_connect
@@ -232,7 +232,7 @@ client.on_message = on_message
 # publishes message to MQTT broker
 def sendMessage(topic, msg):
         client.publish(topic=topic, payload=msg, qos=0, retain=False)
-	print(msg)
+        print(msg)
 
 # connects to IBM IoT MQTT Broker
 client.connect(mq_host, 1883, 60)
