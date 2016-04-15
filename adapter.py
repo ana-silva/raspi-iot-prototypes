@@ -226,7 +226,7 @@ class TM1637:
 	# end coding	
 # end class TM1637
 
-class buzzer
+class buzzer:
   pd = 27 #DATA PIN
 
   def __init__( self):
